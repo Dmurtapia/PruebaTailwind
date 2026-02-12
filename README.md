@@ -27,3 +27,7 @@ git push -u origin main
 git add .
 git commit -m "Descripción de los cambios"
 git push
+
+## Recibir cambios
+git pull 
+git pull origin main
