@@ -35,7 +35,7 @@
                 ¿No tienes cuenta? Regístrate
             </a>
         </div>
-        
+
     </form>
 
 </body>

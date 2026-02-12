@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Ranking de Usuarios</title>
@@ -14,7 +15,6 @@
     </h1>
 
     @forelse($ranking as $index => $user)
-
         <div class="max-w-xl mx-auto mb-6">
 
             <div class="ai-card p-6 space-y-3">
@@ -25,12 +25,12 @@
                         {{ $index + 1 }}º — {{ $user['email'] }}
                     </div>
 
-                    @if($index === 0)
-                        <span class="text-yellow-500 text-xl">🥇</span>
+                    @if ($index === 0)
+                        <span class="text-yellow-500 text-xl"></span>
                     @elseif($index === 1)
-                        <span class="text-gray-500 text-xl">🥈</span>
+                        <span class="text-gray-500 text-xl"></span>
                     @elseif($index === 2)
-                        <span class="text-orange-500 text-xl">🥉</span>
+                        <span class="text-orange-500 text-xl"></span>
                     @endif
 
                 </div>
@@ -58,7 +58,6 @@
         <div class="text-center text-gray-500">
             No hay datos todavía.
         </div>
-
     @endforelse
 
     <div class="mt-10 text-center">
@@ -68,4 +67,5 @@
     </div>
 
 </body>
+
 </html>

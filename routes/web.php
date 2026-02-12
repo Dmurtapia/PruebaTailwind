@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 /* LOGIN */
-Route::get('/login', fn () => view('login'))->name('login');
+
+Route::get('/login', fn() => view('login'))->name('login');
 
 Route::post('/login', function (Request $request) {
 
@@ -20,11 +21,10 @@ Route::post('/login', function (Request $request) {
     ]);
 
     return redirect()->route('contacto');
-
 })->name('login.procesar');
 
 /* REGISTRO (SIMULADO) */
-Route::get('/registro', fn () => view('registro'))->name('registro');
+Route::get('/registro', fn() => view('registro'))->name('registro');
 
 Route::post('/registro', function (Request $request) {
 
@@ -37,7 +37,6 @@ Route::post('/registro', function (Request $request) {
     ]);
 
     return redirect()->route('contacto');
-
 })->name('registro.procesar');
 
 /* CONTACTO */
@@ -75,7 +74,6 @@ Route::post('/contacto', function (Request $request) {
     ]);
 
     return redirect()->route('ticket.creado');
-
 })->name('contacto.enviar');
 
 /* TICKET CREADO */
@@ -88,7 +86,6 @@ Route::get('/contacto/ticket', function () {
     return view('ticket', [
         'ticket' => session('ticket_actual')
     ]);
-
 })->name('ticket.creado');
 
 /* MIS TICKETS */
@@ -104,7 +101,6 @@ Route::get('/contacto/mis-tickets', function () {
         'tickets' => $misTickets,
         'emailUsuario' => $user['email']
     ]);
-
 })->name('mis.tickets');
 
 /* BORRAR TICKET */
@@ -121,13 +117,12 @@ Route::post('/ticket/borrar/{email}/{id}', function ($email, $id) {
 
     $tickets[$email] = array_values(array_filter(
         $tickets[$email] ?? [],
-        fn ($t) => $t['id'] !== $id
+        fn($t) => $t['id'] !== $id
     ));
 
     session()->put('tickets', $tickets);
 
     return redirect()->route('admin.tickets');
-
 })->name('ticket.borrar');
 
 /* ADMIN - VER TICKETS */
@@ -139,7 +134,6 @@ Route::get('/admin/tickets', function () {
     return view('admin-tickets', [
         'tickets' => session('tickets', [])
     ]);
-
 })->name('admin.tickets');
 
 /* ADMIN - COMPLETAR TICKET */
@@ -164,7 +158,6 @@ Route::post('/admin/ticket/completar/{email}/{id}', function ($email, $id) {
     session()->put('tickets', $tickets);
 
     return redirect()->route('admin.tickets');
-
 })->name('admin.ticket.completar');
 
 /* DASHBOARD */
@@ -207,11 +200,9 @@ Route::get('/dashboard', function () {
         'completados',
         'hoy'
     ));
-
 })->name('dashboard');
 
 /* RANKING DE USUARIOS */
-
 Route::get('/ranking', function () {
 
     $user = session('user');
@@ -249,5 +240,4 @@ Route::get('/ranking', function () {
     usort($ranking, fn($a, $b) => $b['total'] <=> $a['total']);
 
     return view('ranking', compact('ranking'));
-
 })->name('ranking');
