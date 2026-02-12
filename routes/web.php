@@ -209,3 +209,45 @@ Route::get('/dashboard', function () {
     ));
 
 })->name('dashboard');
+
+/* RANKING DE USUARIOS */
+
+Route::get('/ranking', function () {
+
+    $user = session('user');
+    if (!$user || $user['role'] !== 'admin') {
+        abort(403);
+    }
+
+    $tickets = session('tickets', []);
+    $ranking = [];
+
+    foreach ($tickets as $email => $userTickets) {
+
+        $total = count($userTickets);
+        $completados = 0;
+
+        foreach ($userTickets as $ticket) {
+            if (($ticket['estado'] ?? '') === 'Completado') {
+                $completados++;
+            }
+        }
+
+        $porcentaje = $total > 0
+            ? round(($completados / $total) * 100)
+            : 0;
+
+        $ranking[] = [
+            'email' => $email,
+            'total' => $total,
+            'completados' => $completados,
+            'porcentaje' => $porcentaje,
+        ];
+    }
+
+    // Ordenar por total tickets DESC
+    usort($ranking, fn($a, $b) => $b['total'] <=> $a['total']);
+
+    return view('ranking', compact('ranking'));
+
+})->name('ranking');

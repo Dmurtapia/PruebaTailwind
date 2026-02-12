@@ -94,11 +94,19 @@
                     </a>
                 </div>
             @endif
+            @if ($user && $user['role'] === 'admin')
+                <div class="mt-3 text-center">
+                    <a href="{{ route('ranking') }}" class="ai-link text-purple-600">
+                        🏆 Ver Ranking de Usuarios
+                    </a>
+                </div>
+            @endif
+
 
         </form>
 
     </div>
-  
+
 </body>
 
 </html>
