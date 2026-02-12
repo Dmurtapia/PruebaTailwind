@@ -31,3 +31,21 @@ git push
 ## Recibir cambios
 git pull 
 git pull origin main
+
+## Comandos para instalar Laravel
+php -v
+composer -V
+
+composer global require laravel/installer
+laravel new miProyecto
+
+cd miProyecto
+php artisan serve
+
+## Instalar Tailwind
+npm install
+npm run dev
+
+## Comandos para base de datos 
+php artisan make:migration create_tickets_table
+php artisan migrate
